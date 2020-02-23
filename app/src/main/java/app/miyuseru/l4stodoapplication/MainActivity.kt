@@ -1,17 +1,18 @@
-package app.miyuseru.l4stodoapplication
-
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import app.miyuseru.l4stodoapplication.R
+import app.miyuseru.l4stodoapplication.Task
+import app.miyuseru.l4stodoapplication.TaskAdapter
 import io.realm.Realm
 import io.realm.RealmResults
 import io.realm.Sort
 import kotlinx.android.synthetic.main.activity_main.*
-import java.nio.file.Files.delete
 import java.util.*
 
+
 class MainActivity : AppCompatActivity() {
+
     private val realm: Realm by lazy {
         Realm.getDefaultInstance()
     }
@@ -23,8 +24,7 @@ class MainActivity : AppCompatActivity() {
         val taskList = readAll()
 
 
-
-
+        //ダミーデータの生成
         if (taskList.isEmpty()) {
             createDummyData()
         }
@@ -33,27 +33,24 @@ class MainActivity : AppCompatActivity() {
 
         recyclerView.setHasFixedSize(true)
         recyclerView.layoutManager = LinearLayoutManager(this)
-
         recyclerView.adapter = adapter
 
     }
 
+
     override fun onDestroy() {
-
-
         super.onDestroy()
         realm.close()
     }
 
-    fun createDummyData() {
-
+    //だみ−10個作るよ
+     fun createDummyData() {
         for (i in 0..10) {
             create(R.drawable.ic_launcher_background, "やること $i")
         }
     }
 
     fun create(imageId: Int, content: String) {
-
         realm.executeTransaction {
             val task = it.createObject(Task::class.java, UUID.randomUUID().toString())
             task.imageId = imageId
@@ -61,12 +58,9 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-
-
-
-    fun readAll(): RealmResults<Task> {
-
+     fun readAll(): RealmResults<Task> {
         return realm.where(Task::class.java).findAll().sort("createdAt", Sort.ASCENDING)
     }
 
 }
+
