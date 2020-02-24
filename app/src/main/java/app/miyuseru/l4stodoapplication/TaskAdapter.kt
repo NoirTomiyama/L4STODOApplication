@@ -2,6 +2,7 @@ package app.miyuseru.l4stodoapplication
 
 import android.content.Context
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
@@ -22,6 +23,7 @@ import java.util.*
 class TaskAdapter(
     private val context: Context,
     private var taskList: OrderedRealmCollection<Task>?,
+    private var listener:OnItemClickListener,
     private val autoUpdate: Boolean
 ) :
     RealmRecyclerViewAdapter<Task, TaskAdapter.TaskViewHolder>(taskList, autoUpdate) {
@@ -33,10 +35,15 @@ class TaskAdapter(
     override fun onBindViewHolder(holder: TaskViewHolder, position: Int) {
         val task: Task = taskList?.get(position) ?: return
 
+        holder.container.setOnClickListener{
+            listener.onItemClick(task)
+        }
 
 
-        holder.imageView.setImageResource(task.imageId)
-        holder.contentTextView.text = task.content
+
+        //holder.imageView.setImageResource(task.imageId)
+        holder.TodoTextView.text = task.Todo
+        //holder.contentTextView.text = task.content
         holder.dateTextView.text =
             SimpleDateFormat("yyyy/MM/dd HH:mm:ss", Locale.JAPANESE).format(task.createdAt)
 
@@ -53,10 +60,16 @@ class TaskAdapter(
 
 
         val container : LinearLayout = view.container
-        val imageView: ImageView = view.imageView
+//        val imageView: ImageView = view.imageView
 
-        val contentTextView: TextView = view.contentTextView
+
+        val TodoTextView: TextView = view.todoTextView
+        //val contentTextView: TextView = view.contentTextView
         val dateTextView: TextView = view.dateTextView
+    }
+
+    interface  OnItemClickListener{
+        fun  onItemClick(item: Task)
     }
 
 
