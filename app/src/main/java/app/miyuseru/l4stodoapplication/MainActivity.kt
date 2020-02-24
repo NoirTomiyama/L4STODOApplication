@@ -1,9 +1,8 @@
+package app.miyuseru.l4stodoapplication
+
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import app.miyuseru.l4stodoapplication.R
-import app.miyuseru.l4stodoapplication.Task
-import app.miyuseru.l4stodoapplication.TaskAdapter
 import io.realm.Realm
 import io.realm.RealmResults
 import io.realm.Sort
@@ -58,7 +57,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-     fun readAll(): RealmResults<Task> {
+    fun readAll(): RealmResults<Task> {
         return realm.where(Task::class.java).findAll().sort("createdAt", Sort.ASCENDING)
     }
 
