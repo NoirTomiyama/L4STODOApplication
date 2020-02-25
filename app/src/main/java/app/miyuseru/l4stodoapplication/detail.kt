@@ -5,18 +5,11 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import androidx.core.content.ContextCompat.startActivity
 import io.realm.Realm
-import io.realm.RealmObject.deleteFromRealm
-import io.realm.kotlin.where
 import kotlinx.android.synthetic.main.activity_detail.*
 import kotlinx.android.synthetic.main.activity_detail.titleText
-import kotlinx.android.synthetic.main.activity_update.*
-import kotlinx.android.synthetic.main.list_item.*
-import java.nio.file.Files.delete
 
 class detail : AppCompatActivity() {
-
 
     private val realm: Realm by lazy {
         Realm.getDefaultInstance()
@@ -51,23 +44,13 @@ class detail : AppCompatActivity() {
         return true
     }
 
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
-        val id = intent.getStringExtra("taskId")
-        val task = realm.where<Task>().equalTo("id", id).findFirst()!!
-
-        titleText.setText(task.Todo)
-        editText2.setText(task.content)
-
-        val message = when (item?.itemId) {
+       when (item.itemId) {
             R.id.deleteButton -> {
                 resources.getString(R.string.menu_tools)
 
-                // update(titleText.text.toString(),editText2.text.toString())
-
-                delete(task = Task())
-//                onDestroy(container)
-
+             delete(taskId.toString())
 
             }
 
@@ -79,14 +62,18 @@ class detail : AppCompatActivity() {
     }
 
 
-    fun delete(task: Task) {
+    fun delete(id : String) {
+//        val id = intent.getStringExtra("taskId")
+//        val task = realm.where<Task>().equalTo("id", id).findFirst()!!
+
         val id = intent.getStringExtra("taskId")
-        val task = realm.where<Task>().equalTo("id", id).findFirst()!!
 
+        realm.executeTransaction() {
+            val task = realm.where(Task :: class.java).equalTo("id", id).findFirst()
 
+               ?: return@executeTransaction
 
-        realm.executeTransaction {
-            deleteFromRealm(task)
+            task.deleteFromRealm()
 
         }
 
@@ -94,10 +81,6 @@ class detail : AppCompatActivity() {
 
     }
 }
-
-
-
-
 
 
 
