@@ -21,7 +21,7 @@ class TaskAdapter(
     private val context: Context,
     private var taskList: OrderedRealmCollection<Task>?,
     private var listener:OnItemClickListener,
-    private var listener2: CheckBoxClickListener,
+    private var checkBox: CheckBoxClickListener,
     private val autoUpdate: Boolean
 ) :
     RealmRecyclerViewAdapter<Task, TaskAdapter.TaskViewHolder>(taskList, autoUpdate) {
@@ -32,7 +32,7 @@ class TaskAdapter(
 
     override fun onBindViewHolder(holder: TaskViewHolder, position: Int) {
         val task: Task = taskList?.get(position) ?: return
-        val checkbox: CheckBox= CheckBox?.get(position) ?: return
+        val check: Task= taskList?.get(position) ?: return
 
 
 
@@ -42,7 +42,7 @@ class TaskAdapter(
         }
 
         holder.container.setOnClickListener{
-            listener2.CheckBoxClick(checkbox)
+            checkBox.CheckBoxClick(check)
         }
 
 
@@ -67,7 +67,7 @@ class TaskAdapter(
 
         val container : LinearLayout = view.container
 
-        val checkbox: CheckBox = view.checkBox
+        val Check: CheckBox = view.checkBox
 //        val imageView: ImageView = view.imageView
 
 
@@ -81,7 +81,7 @@ class TaskAdapter(
     }
 
     interface  CheckBoxClickListener {
-        fun CheckBoxClick(item: CheckBox)
+        fun CheckBoxClick(item: Task)
     }
 
 

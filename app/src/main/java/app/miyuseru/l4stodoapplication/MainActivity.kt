@@ -4,17 +4,12 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.view.View
-import android.widget.CheckBox
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import io.realm.Realm
 import io.realm.RealmResults
 import io.realm.Sort
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.list_item.*
-import java.nio.file.Files.delete
 import java.util.*
 
 
@@ -77,11 +72,17 @@ class MainActivity : AppCompatActivity() {
 
 
 
-        val checkBox =
-            TaskAdapter(this, taskList, object : TaskAdapter.CheckBoxClickListener {
-                override fun onClick(item: CheckBox) {
+        val adapter2 =
+            TaskAdapter(this, taskList, object :TaskAdapter.CheckBoxClickListener {
+                override fun CheckBoxClick(item: Task) {
                     // クリック時の処理
-                    Toast.makeText(applicationContext, item.content + "を削除しました", Toast.LENGTH_SHORT).show()
+//                    val preview = Intent(applicationContext,detail::class.java)
+//                    preview.putExtra("Title" , item.Todo)
+//                    preview.putExtra("create" , item.content)
+//
+//                    preview.putExtra("id" , item.id)
+//
+//                    startActivity(preview)
 
                 }
             }, true)
