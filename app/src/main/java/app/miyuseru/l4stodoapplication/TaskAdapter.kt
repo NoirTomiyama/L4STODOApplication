@@ -5,10 +5,7 @@ import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
-import android.widget.ImageView
-import android.widget.LinearLayout
-import android.widget.TextView
+import android.widget.*
 import androidx.recyclerview.widget.RecyclerView
 import io.realm.OrderedRealmCollection
 import io.realm.RealmRecyclerViewAdapter
@@ -24,19 +21,28 @@ class TaskAdapter(
     private val context: Context,
     private var taskList: OrderedRealmCollection<Task>?,
     private var listener:OnItemClickListener,
+    private var listener2: CheckBoxClickListener,
     private val autoUpdate: Boolean
 ) :
     RealmRecyclerViewAdapter<Task, TaskAdapter.TaskViewHolder>(taskList, autoUpdate) {
 
     override fun getItemCount(): Int = taskList?.size ?: 0
-
+    //override fun getItemCount(): Int = checkList?.size ?: 0
 
 
     override fun onBindViewHolder(holder: TaskViewHolder, position: Int) {
         val task: Task = taskList?.get(position) ?: return
+        val checkbox: CheckBox= CheckBox?.get(position) ?: return
+
+
+
 
         holder.container.setOnClickListener{
             listener.onItemClick(task)
+        }
+
+        holder.container.setOnClickListener{
+            listener2.CheckBoxClick(checkbox)
         }
 
 
@@ -60,6 +66,8 @@ class TaskAdapter(
 
 
         val container : LinearLayout = view.container
+
+        val checkbox: CheckBox = view.checkBox
 //        val imageView: ImageView = view.imageView
 
 
@@ -70,6 +78,10 @@ class TaskAdapter(
 
     interface  OnItemClickListener{
         fun  onItemClick(item: Task)
+    }
+
+    interface  CheckBoxClickListener {
+        fun CheckBoxClick(item: CheckBox)
     }
 
 

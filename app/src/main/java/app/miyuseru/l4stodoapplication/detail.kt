@@ -8,6 +8,7 @@ import android.view.MenuItem
 import io.realm.Realm
 import kotlinx.android.synthetic.main.activity_detail.*
 import kotlinx.android.synthetic.main.activity_detail.titleText
+import kotlinx.android.synthetic.main.list_item.*
 
 class detail : AppCompatActivity() {
 
@@ -62,11 +63,9 @@ class detail : AppCompatActivity() {
     }
 
 
-    fun delete(id : String) {
-//        val id = intent.getStringExtra("taskId")
-//        val task = realm.where<Task>().equalTo("id", id).findFirst()!!
+    fun delete(id :String) {
 
-        val id = intent.getStringExtra("taskId")
+        val id :String = intent.getStringExtra("id")
 
         realm.executeTransaction() {
             val task = realm.where(Task :: class.java).equalTo("id", id).findFirst()
