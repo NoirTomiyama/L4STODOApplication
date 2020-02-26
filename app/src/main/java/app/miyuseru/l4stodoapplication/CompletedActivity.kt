@@ -1,16 +1,17 @@
 package app.miyuseru.l4stodoapplication
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import androidx.appcompat.app.AppCompatActivity
 
-class Active : AppCompatActivity() {
+// TODO 廃棄する
+class CompletedActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_active)
+        setContentView(R.layout.activity_completed)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -26,16 +27,15 @@ class Active : AppCompatActivity() {
                 startActivity(Intent(applicationContext, MainActivity::class.java))
             }
 
-
-
-            R.id.active -> {resources.getString(R.string.active_add)
-                startActivity(Intent(applicationContext, Active::class.java))
+            R.id.active -> {
+                resources.getString(R.string.active_add)
+                startActivity(Intent(applicationContext, ActiveActivity::class.java))
             }
 
 
             R.id.completed -> {
                 resources.getString(R.string.completed_add)
-                startActivity(Intent(applicationContext, Conpleted::class.java))
+                startActivity(Intent(applicationContext, CompletedActivity::class.java))
             }
             else -> super.onOptionsItemSelected(item)
 

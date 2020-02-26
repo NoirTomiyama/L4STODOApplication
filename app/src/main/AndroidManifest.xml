@@ -10,10 +10,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Conpleted"></activity>
-        <activity android:name=".Active" />
+        <activity android:name=".CompletedActivity"></activity>
+        <activity android:name=".ActiveActivity" />
         <activity android:name=".UpdateActivity" />
-        <activity android:name=".detail" />
+        <activity android:name=".DetailActivity" />
         <activity android:name=".CreateActivity" />
         <activity
             android:name=".create"
