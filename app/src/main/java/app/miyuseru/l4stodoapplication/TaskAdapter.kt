@@ -26,6 +26,8 @@ class TaskAdapter(
 ) :
     RealmRecyclerViewAdapter<Task, TaskAdapter.TaskViewHolder>(taskList, autoUpdate) {
 
+
+
     override fun getItemCount(): Int = taskList?.size ?: 0
     //override fun getItemCount(): Int = checkList?.size ?: 0
 
@@ -41,8 +43,8 @@ class TaskAdapter(
             listener.onItemClick(task)
         }
 
-        holder.container.setOnClickListener{
-            checkBox.CheckBoxClick(check)
+        holder.check.setOnClickListener{
+            checkBox.onCheckBoxClick(check)
         }
 
 
@@ -56,6 +58,7 @@ class TaskAdapter(
 
     }
 
+
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): TaskViewHolder {
         val v = LayoutInflater.from(context).inflate(R.layout.list_item, viewGroup, false)
 
@@ -67,7 +70,7 @@ class TaskAdapter(
 
         val container : LinearLayout = view.container
 
-        val Check: CheckBox = view.checkBox
+        val check: CheckBox = view.checkBox
 //        val imageView: ImageView = view.imageView
 
 
@@ -81,8 +84,11 @@ class TaskAdapter(
     }
 
     interface  CheckBoxClickListener {
-        fun CheckBoxClick(item: Task)
+        fun onCheckBoxClick(item: Task)
     }
+
+
+
 
 
 }

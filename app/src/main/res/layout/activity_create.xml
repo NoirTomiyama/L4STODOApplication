@@ -27,8 +27,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
+            android:hint="Title"
             android:inputType="textPersonName"
-            android:text="Title"
             android:textSize="30sp" />
 
         <EditText
@@ -37,8 +37,8 @@
             android:layout_height="match_parent"
             android:ems="10"
             android:gravity="top"
-            android:inputType="textPersonName"
-            android:text="text" />
+            android:hint="imput text"
+            android:inputType="textPersonName" />
 
     </LinearLayout>
 

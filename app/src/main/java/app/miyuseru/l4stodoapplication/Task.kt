@@ -8,7 +8,7 @@ open class Task(
     @PrimaryKey open var id: String = UUID.randomUUID().toString(),
     open var Todo:  String = "",
     open var content: String = "",
-    open var Check : Boolean = true ,
+    open var isChecked : Boolean = false,
     open var createdAt: Date = Date(System.currentTimeMillis())
 
 ) : RealmObject()
