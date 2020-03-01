@@ -30,7 +30,7 @@ class TaskAdapter(
 
     override fun getItemCount(): Int = taskList?.size ?: 0
     //override fun getItemCount(): Int = checkList?.size ?: 0
-
+   // task = getTask()
 
     override fun onBindViewHolder(holder: TaskViewHolder, position: Int) {
         val task: Task = taskList?.get(position) ?: return

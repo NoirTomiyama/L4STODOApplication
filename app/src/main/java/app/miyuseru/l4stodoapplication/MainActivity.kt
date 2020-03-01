@@ -38,7 +38,7 @@ class MainActivity : AppCompatActivity() {
 
         switchView(tasks)
 
-        val taskList = readAll()
+        val taskList = getTasks()
 
 
 
@@ -64,10 +64,13 @@ class MainActivity : AppCompatActivity() {
 
         val adapter = TaskAdapter(//TaskAdapter(this, taskList, true)
             this,
-        taskList,
+            taskList)
+
+
 
        object : TaskAdapter.OnItemClickListener {
            override fun onItemClick(item: Task) {
+               readAll()
 
 
                val preview = Intent(applicationContext, detail::class.java)
@@ -75,7 +78,7 @@ class MainActivity : AppCompatActivity() {
                preview.putExtra("create", item.content)
                preview.putExtra("id", item.id)
                startActivity(preview)
-               Log.d("click","click")
+               Log.d("click", "click")
 
 
            }
@@ -94,6 +97,7 @@ class MainActivity : AppCompatActivity() {
 
                 }
             },true)
+       }
 
 
 
@@ -276,7 +280,9 @@ class MainActivity : AppCompatActivity() {
 //    }
 
     fun readAll(): RealmResults<Task> {
-        return realm.where(Task::class.java).findAll().sort("createdAt", Sort.ASCENDING)
+
+       getTasks()
+       return realm.where(Task::class.java).findAll().sort("createdAt", Sort.ASCENDING)
     }
 
 
@@ -295,7 +301,8 @@ class MainActivity : AppCompatActivity() {
 //          }
 //
 // })
-  }
+
+}
 
 
 
